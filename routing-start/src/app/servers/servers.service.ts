@@ -21,13 +21,17 @@ export class ServersService {
     return this.servers;
   }
 
-  getServer(id: number) {
-    const server = this.servers.find(
-      (s) => {
-        return s.id === id;
-      }
-    );
-    return server;
+  getServer(id: number,fast = false) {
+    let promise = new Promise(res => {
+      const server = this.servers.find(
+        (s) => {
+          return s.id === id;
+        }
+      );
+    if(!fast)setTimeout(() => res(server),2000);
+    else res(server)
+    });
+    return promise;
   }
 
   updateServer(id: number, serverInfo: {name: string, status: string}) {

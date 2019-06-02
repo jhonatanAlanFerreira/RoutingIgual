@@ -1,2 +1,5 @@
-<h5>{{ server.name }}</h5>
-<p>Server status is {{ server.status }}</p>
+ <div *ngIf="!loading">
+    <h5>{{ server.name }}</h5>
+    <p>Server status is {{ server.status }}</p>
+</div>
+<app-loading *ngIf="loading"></app-loading>
