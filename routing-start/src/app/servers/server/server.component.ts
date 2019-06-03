@@ -11,16 +11,23 @@ import { ActivatedRoute } from '@angular/router';
 export class ServerComponent implements OnInit {
   server: {id: number, name: string, status: string};
   loading = true;
+  cidades:any[];
+  show = 0;
 
   constructor(
     private serversService: ServersService,
-    private activatedRoute: ActivatedRoute) { }
+    private activatedRoute: ActivatedRoute,) { }
 
   ngOnInit() {
     this.serversService.getServer(1,true).then(server => {
       this.loading = true;
       this.server = <{id:number,name:string,status:string}>server;
       this.loading = false;
+      this.serversService.toarray();
+
+      this.cidades = this.serversService.toarray();
+
+      this.activatedRoute.queryParams.subscribe(query => this.show = query['showCidades'] == 'true'? 1:0);
     });
 
     this.activatedRoute.params.subscribe(param => {

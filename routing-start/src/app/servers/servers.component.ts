@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ServersService } from './servers.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-servers',
@@ -9,10 +10,20 @@ import { ServersService } from './servers.service';
 export class ServersComponent implements OnInit {
   private servers: {id: number, name: string, status: string}[] = [];
 
-  constructor(private serversService: ServersService) { }
+  show = false;
+
+  constructor(
+    private serversService: ServersService,
+    private activatedRoute: ActivatedRoute,
+    private rota:Router) { }
 
   ngOnInit() {
     this.servers = this.serversService.getServers();
+  }
+
+  showCidades(){
+    this.show = !this.show;
+    this.rota.navigate([],{queryParams:{"showCidades":this.show}});
   }
 
 }
