@@ -14,10 +14,11 @@ import { ServersService } from './servers/servers.service';
 import { Routes, RouterModule } from '@angular/router';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { LoadingComponent } from './loading/loading.component';
+import { AuthGuardService } from './auth-guard.service';
 
 const appRoutes: Routes = [
   {path:"", component: HomeComponent},
-  {path:"servers",component: ServersComponent,children:[
+  {path:"servers",canActivate:[AuthGuardService], component: ServersComponent,children:[
     {path:"server/:id", component: EditServerComponent}
   ]}, 
   {path:"users",component: UsersComponent,children:[

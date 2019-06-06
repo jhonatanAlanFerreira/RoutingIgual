@@ -19,14 +19,11 @@ export class ServersService {
 
   toarray(){
     var ar =  this.hugeArray.split("(");
-    
-    ar = ar.map((str,key) => {(key)
-      
+    ar = ar.map((str,key) => {
     if(key > 0)  return str = str.slice(6,str.length-1);
     else return str.slice(0,str.length-1);
     });
     ar.pop();
-
     return ar;
   }
 

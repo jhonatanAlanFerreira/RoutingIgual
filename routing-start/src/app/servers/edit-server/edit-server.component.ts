@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { ServersService } from '../servers.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 
 @Component({
@@ -14,10 +14,12 @@ export class EditServerComponent implements OnInit {
   serverName = '';
   serverStatus = '';
   loading = true;
+  changesSaved = false;
 
   constructor(
     private serversService: ServersService,
-    private activate: ActivatedRoute) { }
+    private activate: ActivatedRoute,
+    private route: Router) { }
 
   ngOnInit() {
     this.setServer();
@@ -36,6 +38,8 @@ export class EditServerComponent implements OnInit {
 
   onUpdateServer() {
     this.serversService.updateServer(this.server.id, {name: this.serverName, status: this.serverStatus});
+    this.changesSaved = true;
+    this.route.navigate(['../'], {relativeTo: this.activate});
   }
 
 }
